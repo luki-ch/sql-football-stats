@@ -1,0 +1,60 @@
+-- Create table
+CREATE TABLE matches (
+    id INTEGER PRIMARY KEY,
+    opponent TEXT,
+    goals_scored INTEGER,
+    goals_conceded INTEGER,
+    match_date TEXT
+);
+
+-- Insert sample Chelsea match data
+INSERT INTO matches (id, opponent, goals_scored, goals_conceded, match_date) VALUES
+(1, 'Liverpool', 1, 1, '2024-02-04'),
+(2, 'Arsenal', 2, 2, '2024-02-11'),
+(3, 'Manchester City', 1, 0, '2024-02-18'),
+(4, 'Tottenham', 3, 1, '2024-02-25'),
+(5, 'Newcastle United', 2, 1, '2024-03-03'),
+(6, 'Manchester United', 1, 2, '2024-03-10'),
+(7, 'Brighton', 4, 2, '2024-03-17'),
+(8, 'Aston Villa', 0, 0, '2024-03-24');
+
+-- Show all matches
+SELECT * FROM matches;
+
+-- Total goals scored
+SELECT SUM(goals_scored) AS total_goals_scored FROM matches;
+
+-- Total goals conceded
+SELECT SUM(goals_conceded) AS total_goals_conceded FROM matches;
+
+-- Average goals scored per match
+SELECT AVG(goals_scored) AS avg_goals_scored FROM matches;
+
+-- Average goals conceded per match
+SELECT AVG(goals_conceded) AS avg_goals_conceded FROM matches;
+
+-- Goal difference per match
+SELECT opponent,
+       goals_scored - goals_conceded AS goal_difference
+FROM matches;
+
+-- Best offensive match (most goals scored)
+SELECT opponent, goals_scored
+FROM matches
+ORDER BY goals_scored DESC
+LIMIT 1;
+
+-- Worst defensive match (most goals conceded)
+SELECT opponent, goals_conceded
+FROM matches
+ORDER BY goals_conceded DESC
+LIMIT 1;
+
+-- Matches where Chelsea scored more than 2 goals
+SELECT * FROM matches
+WHERE goals_scored > 2;
+
+-- Opponents sorted by goals scored against them
+SELECT opponent, goals_scored
+FROM matches
+ORDER BY goals_scored DESC;
